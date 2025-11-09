@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingDiv = document.getElementById('loading');
     const inputSection = document.getElementById('input-section');
 
+    chrome.storage.local.get(['jobDescription'], function(result) {
+        if (result.jobDescription) {
+            jobDescTextarea.value = result.jobDescription;
+        }
+    });
+
     analyzeBtn.addEventListener('click', async function() {
         const jobDescription = jobDescTextarea.value.trim();
 
