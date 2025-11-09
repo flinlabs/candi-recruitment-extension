@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputSection = document.getElementById('input-section');
 
     analyzeBtn.addEventListener('click', async function() {
-        const jobDescription = jobDescTextarea.ariaValueMax.trim();
+        const jobDescription = jobDescTextarea.value.trim();
 
         if(!jobDescription) {
             errorDiv.textContent = 'Please enter a job description.';
