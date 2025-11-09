@@ -18,5 +18,11 @@
         "activeTab",
         "storage",
         "scripting"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://www.linkedin.com/in/*"],
+            "js": ["content.js"]
+        }
     ]
 }

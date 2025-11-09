@@ -30,7 +30,40 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-    }
-)
-}
-)
+        //inputSection.style.display = 'none';
+        //resultsDiv.style.display = 'none';
+        //loadingDiv.style.display = 'block';
+
+        try {
+            const response = await chrome.tabs.sendMessage(tab.id, {action: 'extractProfile'});
+
+            if(response && response.success) {                
+                const profileData = response.data;
+                console.log('headline: ' + profileData.headline);
+                console.log('education: ' + profileData.education);
+
+                return;
+                //displayResults(profileData);
+            } else {
+                throw new Error('Failed to extract profile data');
+            }
+        } catch (error) {
+            loadingDiv.style.display = 'none';
+            inputSection.style.display = 'block';
+            errorDiv.textContent = 'Error: ' + error.message + '. Try refreshing the LinkedIn page.';
+            return;
+        }
+    });
+})
+
+/*function displayResults(analysis) {
+    const loadingDiv = document.getElementById('loading');
+    const resultsDiv = document.getElementById('results');
+    const scoreDiv = document.getElementById('score');
+    const explanationDiv = document.getElementById ('explanation');
+
+    loadingDiv.style.display = 'none';
+    resultsDiv.style.display = 'block';
+
+
+}*/
