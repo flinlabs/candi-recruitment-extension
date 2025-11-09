@@ -19,9 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
             errorDiv.textContent = 'Please enter a job description.';
             return;
         }
-        errorDiv.textContent = 'No error';
+        errorDiv.textContent = '';
 
         chrome.storage.local.set({jobDescription: jobDescription});
+
+        const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+
+        if (!tab.url || !tab.url.includes('linkedin.com/in/')) {
+            errorDiv.textContent = 'Please navigate to a LinkedIn profile. Current URL: ' + tab.url;
+            return;
+        }
+
     }
 )
 }
