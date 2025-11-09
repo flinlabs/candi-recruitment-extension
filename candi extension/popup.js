@@ -1,0 +1,22 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const jobDescTextarea = document.getElementById('jobDesc');
+    const errorDiv = document.getElementById('error');
+    const resultsDiv = document.getElementById('results');
+    const loadingDiv = document.getElementById('loading');
+    const inputSection = document.getElementById('input-section');
+
+    analyzeBtn.addEventListener('click', async function() {
+        const jobDescription = jobDescTextarea.ariaValueMax.trim();
+
+        if(!jobDescription) {
+            errorDiv.textContent = 'Please enter a job description.';
+            return;
+        }
+        errorDiv.textContent = 'No error';
+
+        chrome.storage.local.set({jobDescription: jobDescription});
+    }
+)
+}
+)
